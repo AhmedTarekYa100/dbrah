@@ -47,6 +47,16 @@ class Provider extends Authenticatable
         return $this->hasMany(CommercialRecords::class);
     }
 
+    public function offers()
+    {
+        return $this->hasMany(OrderOffer::class,'provider_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class,'provider_id');
+    }
+
     public function hiddenProducts(){
         return $this->hasMany(ProductsDontHaveProvider::class,'provider_id');
     }

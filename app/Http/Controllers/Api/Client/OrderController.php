@@ -229,7 +229,7 @@ class OrderController extends Controller
             return $this->returnValidationError($code, $validator,405);
         }
 
-        $offer = OrderOffer::with('offer_details','provider')->find($request->offer_id);
+        $offer = OrderOffer::with('offer_details','provider','delivery_date')->find($request->offer_id);
         if (!$offer) {
             return $this->returnError(405,'offer not found',405);
         }
@@ -348,7 +348,7 @@ class OrderController extends Controller
                         'representative_id' => $id,
                         'status'            => 'new',
                     ]);
-                     $this->sendBasicNotification($title,$body,$request->order_id,$user_id,null,$order->provider_id,$id);
+                     $this->sendBasicNotification($title,$body,$request->order_id,$user_id,null,null,$id);
                 }
             }
 

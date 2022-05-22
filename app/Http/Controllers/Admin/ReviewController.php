@@ -52,7 +52,7 @@ class ReviewController extends Controller
 
     public function delete(request $request)
     {
-        $review = Reviews::findOrFail($request->id)->first();
+        $review = Reviews::findOrFail($request->id);
         $review->delete();
         return response(['message'=>'تمت عملية الحذف بنجاح','status'=>200],200);
     }

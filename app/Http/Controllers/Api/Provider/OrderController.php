@@ -253,7 +253,8 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(),[
             'provider_id' => 'required|exists:providers,id',
             'order_id'    => 'required|exists:orders,id',
-            'delivery_date_time' => 'required',
+            'delivery_date_time_id' => 'required|exists:delivery_times,id',
+            'delivery_date_time' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'note'          => 'nullable',
             'total_price'   => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'offer_details' => 'required|array',
@@ -294,6 +295,7 @@ class OrderController extends Controller
             'order_id'           => $request->order_id,
             'provider_id'        => $request->provider_id,
             'status'             => 'new',
+            'delivery_date_time_id' => $request->delivery_date_time_id,
             'delivery_date_time' => $request->delivery_date_time,
             'total_price'        => $request->total_price,
             'total_tax'        => $request->total_tax,
@@ -323,7 +325,8 @@ class OrderController extends Controller
 
         Order::find($order->id)->update(['status'=> 'offered']);
 
-         $this->sendBasicNotification($title,$body,$order->id,$user_id,$provider_id,$request->provider_id);
+//         $this->sendBasicNotification($title,$body,$order->id,$user_id,$provider_id,$request->provider_id);
+         $this->sendBasicNotification($title,$body,$order->id,$user_id,null,null);
 
         return $this->returnSuccessMessage('تم تقديم العرض بنجاح');
     }

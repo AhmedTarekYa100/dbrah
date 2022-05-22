@@ -26,6 +26,7 @@
                                 <th class="min-w-20px">وقت الطلب</th>
                                 <th class="min-w-20px">الحالة</th>
                                 <th class="min-w-20px">التفاصيل</th>
+                                <th class="min-w-20px">فاتورة</th>
                             </tr>
                             </thead>
                         </table>
@@ -33,6 +34,24 @@
                 </div>
             </div>
         </div>
+
+        <!-- Edit MODAL -->
+        <div class="modal fade" id="editOrCreate" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="example-Modal3">تفاصيل الطلب</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit MODAL CLOSED -->
 
     </div>
     @include('Admin/layouts/myAjaxHelper')
@@ -46,8 +65,22 @@
             {data: 'created_at', name: 'created_at'},
             {data: 'status', name: 'status'},
             {data: 'details', name: 'details',orderable: false, searchable: false},
+            {data: 'bill', name: 'bill',orderable: false, searchable: false},
         ]
         showData('{{route('endedOrders')}}', columns);
+
+        // Show Details Modal
+        $(document).on('click', '.detailsBtn', function () {
+            var id = $(this).data('id')
+            var url = "{{route('orderDetails',':id')}}";
+            url = url.replace(':id', id)
+            $('#modal-body').html(loader)
+            $('#editOrCreate').modal('show')
+
+            setTimeout(function () {
+                $('#modal-body').load(url)
+            }, 500)
+        })
     </script>
 @endsection
 

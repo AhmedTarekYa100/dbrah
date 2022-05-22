@@ -102,11 +102,13 @@ class OrderController extends Controller
             }
             elseif ($request->status == 'on_the_way'){
                 $order->status = 'on_way';
+                $order->save();
                 $body = 'your order is on way';
                 $this->sendBasicNotification($title,$body,$request->order_id,$user_id,$provider_id,null,null,$request->representative_id);
             }
             elseif ($request->status == 'ended'){
                 $order->status = 'delivered';
+                $order->save();
                 OrderOffer::where('order_id',$request->order_id)
                     ->where('provider_id',$order->provider_id)->update(['status'=>'ended']);
                 $body = 'your order is delivered';
@@ -114,10 +116,10 @@ class OrderController extends Controller
             }
             elseif($request->status == 'rejected'){
                 $order->status = 'preparing';
+                $order->save();
                 $body = 'delivery is rejected by the representative';
                 $this->sendBasicNotification($title,$body,$request->order_id,null,$provider_id,null,null,$request->representative_id);
             }
-            $order->save();
         }
          return $this->returnData('data',$order_rep,'Done Successful');
     }

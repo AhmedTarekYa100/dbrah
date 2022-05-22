@@ -22,4 +22,8 @@ class OrderOffer extends Model
         return $this->belongsTo(Provider::class,'provider_id');
     }//end fun
 
+    public function delivery_date(){
+        return $this->belongsTo(DeliveryTime::class,'delivery_date_time_id');
+    }
+
 }//end class

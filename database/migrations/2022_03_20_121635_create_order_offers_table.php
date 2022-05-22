@@ -18,11 +18,11 @@ class CreateOrderOffersTable extends Migration
 
             $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')
-                ->on('orders')->onDelete('cascade');
+                ->on('orders')->onDelete('cascade')->onUpdate('cascade');;
 
             $table->unsignedBigInteger('provider_id')->nullable();
             $table->foreign('provider_id')->references('id')
-                ->on('providers')->onDelete('cascade');
+                ->on('providers')->onDelete('cascade')->onUpdate('cascade');
 
             $table->double('total_price')->default(0)->nullable();
             $table->enum('status',['new','accepted','rejected'])

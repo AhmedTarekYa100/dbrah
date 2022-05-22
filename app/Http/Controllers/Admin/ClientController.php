@@ -67,7 +67,7 @@ class ClientController extends Controller
 
     public function delete(request $request)
     {
-        $client = User::findOrFail($request->id)->first();
+        $client = User::findOrFail($request->id);
         if (file_exists($client->getAttributes()['image']))
             unlink($client->getAttributes()['image']);
 

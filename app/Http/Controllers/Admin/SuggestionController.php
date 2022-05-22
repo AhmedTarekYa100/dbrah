@@ -43,7 +43,7 @@ class SuggestionController extends Controller
 
     public function delete(request $request)
     {
-        $pro = ProductSuggestion::findOrFail($request->id)->first();
+        $pro = ProductSuggestion::findOrFail($request->id);
         if (file_exists($pro->getAttributes()['image']))
             unlink($pro->getAttributes()['image']);
 

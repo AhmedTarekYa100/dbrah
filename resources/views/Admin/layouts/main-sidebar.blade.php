@@ -40,9 +40,24 @@
         </li>
 
         <li class="slide">
+            <a class="side-menu__item" href="{{route('provider.index')}}">
+                <i class="fe fe-user-check side-menu__icon"></i>
+                <span class="side-menu__label">مقدمي الخدمة</span>
+            </a>
+        </li>
+
+        <li class="slide">
             <a class="side-menu__item" href="{{route('clients.index')}}">
                 <i class="fe fe-users side-menu__icon"></i>
                 <span class="side-menu__label">قائمة العملاء</span>
+            </a>
+        </li>
+
+
+        <li class="slide">
+            <a class="side-menu__item" href="{{route('representative.index')}}">
+                <i class="fe fe-truck side-menu__icon"></i>
+                <span class="side-menu__label">مندوبين التوصيل</span>
             </a>
         </li>
 

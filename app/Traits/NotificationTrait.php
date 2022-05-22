@@ -74,7 +74,7 @@ Trait  NotificationTrait
         $fields = array(
             'registration_ids' => $tokens,
             'data' => $data,
-            'notification' =>$data,
+//            'notification' =>$data,
         );
         $headers = array(
             'Authorization: key=' . $this->serverKey,
@@ -109,7 +109,7 @@ Trait  NotificationTrait
         $fields = array(
             'registration_ids' => $tokens,
             'data' => $data,
-            'notification' =>$data,
+//            'notification' =>$data,
         );
         $fields = json_encode($fields);
 

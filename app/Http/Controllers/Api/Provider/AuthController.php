@@ -29,7 +29,7 @@ class AuthController extends Controller
         ]);
         if ($validator->fails()) {
             $code = $this->returnCodeAccordingToInput($validator);
-            return $this->returnValidationError($code, $validator);
+            return $this->returnValidationError($code, $validator,422);
         }
 
         if($request->type == 'email'){

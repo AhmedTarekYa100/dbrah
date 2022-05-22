@@ -224,11 +224,11 @@ class AuthController extends Controller
             return $this->returnValidationError($code, $validator,406);
         }
         $data = Notification::where($request->all())
-            ->with('order','representative','provider')->orderBy('id','desc')->get();
+            ->with('order','representative')->orderBy('id','desc')->get();
         foreach($data as $item)
         {
             $item->user = $item->order->user;
-//            $item->provider = $item->order->provider;
+            $item->provider = $item->order->provider;
         }
 
         return $this->returnData('data',$data,'done');
